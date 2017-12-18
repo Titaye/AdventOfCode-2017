@@ -2,9 +2,6 @@ module AOC.Day03
 
 open Expecto
 open System
-open System.Runtime.Remoting.Lifetime
-open System.Data
-open Mono.Cecil
 
 let computeDistance input =
   let rec compute input i previousSquare = 

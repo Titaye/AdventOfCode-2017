@@ -1,19 +1,6 @@
-module Day1
+module AOC.Day01
 
 open Expecto
-open System
-
-let asciiBytesToInts =
-  Array.map (fun b -> (b - 48uy) |> int)
-
-let shiftArrayBy offset (src:'a []) =
-    let dest = Array.zeroCreate src.Length
-    Array.Copy(src, offset, dest, 0, src.Length - offset)
-    Array.Copy(src, 0, dest, src.Length - offset, offset)
-    dest
-
-let shiftArray =
-    shiftArrayBy 1
 
 let computeSumPuzzle1 input =
   let shiftedArray =
@@ -37,7 +24,7 @@ let computeSumPuzzle2 input =
 
 [<Tests>]
 let tests =
-  testList "puzzle1" [
+  testList "day01-puzzle1" [
     testCase "asciiBytesToInts should produce byte array" <| fun _ ->
       let input = "012"B
       let expected = [| 0; 1; 2 |]
@@ -74,13 +61,13 @@ let tests =
       
       input 
       |> computeSumPuzzle1
-      |> printfn "Day1 puzzle1 answer: %i "
+      |> printfn "Day01 puzzle1 answer: %i "
   ]
 
 
 [<Tests>]
 let testsPuzzle2 =
-  testList "puzzle2" [
+  testList "day01-puzzle2" [
     
     testCase "shiftArrayBy 2 should 'loop' input array" <| fun _ ->
       let input = [| 0; 1; 2; 3|]
@@ -115,5 +102,5 @@ let testsPuzzle2 =
       
       input 
       |> computeSumPuzzle2
-      |> printfn "Day1 puzzle2 answer: %i "
+      |> printfn "Day01 puzzle2 answer: %i "
   ]

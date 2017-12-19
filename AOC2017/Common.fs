@@ -7,14 +7,14 @@ open System.Text.RegularExpressions
 let asciiBytesToInts =
   Array.map (fun b -> (b - 48uy) |> int)
 
-let shiftArrayBy offset (src:'a []) =
+let rotateArrayBy offset (src:'a []) =
     let dest = Array.zeroCreate src.Length
     Array.Copy(src, offset, dest, 0, src.Length - offset)
     Array.Copy(src, 0, dest, src.Length - offset, offset)
     dest
 
-let shiftArray ar =
-    shiftArrayBy 1 ar
+let rotateArray ar =
+    rotateArrayBy 1 ar
 
 let numbersRowToList =
   let numberRegex = Regex(@"\d+", RegexOptions.Compiled)

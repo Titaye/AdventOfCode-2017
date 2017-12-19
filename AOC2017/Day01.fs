@@ -2,25 +2,23 @@ module AOC.Day01
 
 open Expecto
 
-let computeSumPuzzle1 input =
-  let shiftedArray =
-    input |> shiftArray
-  
-  Array.zip input shiftedArray
+let sumArrays rotateArray input =
+  input 
+  |> rotateArray
+  |> Array.zip input
   |> Array.fold ( fun r -> function
       | (x,y) when x = y -> r + int x
       | _ -> r) 0
 
+let computeSumPuzzle1 =
+  sumArrays rotateArray
 
 let computeSumPuzzle2 input =
-  let shiftedArray =
-    input |> shiftArrayBy (input.Length / 2)
-  
-  Array.zip input shiftedArray
-  |> Array.fold ( fun r -> function
-      | (x,y) when x = y -> r + int x
-      | _ -> r) 0
+  let rotate = 
+    rotateArrayBy (Array.length input / 2)
 
+  sumArrays rotate input
+  
 
 [<Tests>]
 let tests =
@@ -35,7 +33,7 @@ let tests =
       testCase "shiftArray should 'loop' input array" <| fun _ ->
         let input = [| 0; 1; 2 |]
         let expected = [| 1; 2; 0 |]
-        let result = input |> shiftArray
+        let result = input |> rotateArray
         
         Expect.equal result expected "Shifted array contains wrong value"
 
@@ -69,7 +67,7 @@ let tests =
       testCase "shiftArrayBy 2 should 'loop' input array" <| fun _ ->
         let input = [| 0; 1; 2; 3|]
         let expected = [| 2; 3; 0; 1 |]
-        let result = input |> shiftArrayBy (input.Length / 2)
+        let result = input |> rotateArrayBy (input.Length / 2)
         
         Expect.equal result expected "Shifted array contains wrong value"
 
